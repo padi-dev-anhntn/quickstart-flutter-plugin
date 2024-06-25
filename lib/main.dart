@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:banuba_sdk_example/page_camera.dart';
+import 'package:banuba_sdk_example/page_grand.dart';
 import 'package:banuba_sdk_example/page_image.dart';
 import 'package:banuba_sdk_example/page_touchup.dart';
 import 'package:banuba_sdk_example/page_arcloud.dart';
@@ -10,9 +11,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-const banubaToken = <#"Place Token here"#>
+const banubaToken =
+    "Qk5CICT3glGH+ym+thBwGqbhZv/Nqyd9l/b2FZW952dZhMm4bmUj3g13Iyf9SdY4jY0dkUZ8EQB5hp7H/v2nTeXqMnVcbPo8ol7xEA+sIoUg+cYXWg+lBAYcGgi0I0utVxU6RpWkf79rveUSJzkEKPjIMy7EH7VekfuX/xSQbmmLm5E+VWu9IKRrqHUtFy7CVW0Oe/AKkd2tdIOx6gKWxID5b0FVJvl3s4YvYUwbQfbcjeTa5NnJITdi4/UwbkP+9wa2oSQ1gUhoBFI5g7Yc0k/Ux18WV1obfmwu9lTMVgsR+zKjVM4+jvxWsOJDMayCUMCNB24XcvtY6Ay+wneMD/GKy0AIkPW2JN24l3D09a4RrkGME8dFKQZTi8VwV5rmQbex48KAa6AdI3bNVdATdVVpQXRuz3ou9zjmnixzudmZsbsetW3O/7jUJdyMWNZj3d57+f3ryLDa3WvmyB/UnkXN0EtlD7cc/1gKiNHfs24D9g7o/Bys/6MId/ClJO/6TuHifpSYGAmalNVdiig8FL9BBFG7WcTgTYE5P5syPxheQmEH/ePTm7qcpcFRK4cqTWM/MzEGB/PxxZEy4jAVncuKjL7a8LKcAA6Bkz5KDNkw7BQRcA9Wff1wq2Bz6/lYH4LOsV9z+Wuj/Gr3lt0Aug==";
 
-enum EntryPage { camera, image, touchUp, arCloud }
+enum EntryPage { camera, image, touchUp, arCloud, grand }
 
 void main() {
   runApp(const MaterialApp(home: MyApp()));
@@ -70,6 +72,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             onPressed: () => _navigateToPage(EntryPage.arCloud),
             child: textWidget('Load from AR Cloud'),
           ),
+          SizedBox.fromSize(size: const Size.fromHeight(20.0)),
+          ElevatedButton(
+            style: buttonStyle,
+            onPressed: () => _navigateToPage(EntryPage.grand),
+            child: textWidget('Load custom effect'),
+          ),
         ],
       ),
     );
@@ -102,6 +110,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ARCloudPage()),
+        );
+        return;
+
+      case EntryPage.grand:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const GranPage()),
         );
         return;
     }

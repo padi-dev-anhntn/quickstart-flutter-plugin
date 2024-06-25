@@ -32,7 +32,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   final _captureAudioInVideoRecording = true;
 
   final _effects = [
-    "80s", "TouchUp"
+    "80s", "TouchUp","CustomEffect"
   ];
   int _currentEffectIndex = -1;
   String? _currentEffectName = null;
@@ -100,6 +100,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     await _banubaSdkManager.openCamera();
     await _banubaSdkManager.attachWidget(_epWidget.banubaId);
     _banubaSdkManager.startPlayer();
+    await _banubaSdkManager.loadEffect("effects/TrollGrandma", false);
   }
 
   Future<void> toggleEffect() async {
